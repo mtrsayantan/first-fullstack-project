@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mtr|Sign In</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="new.css">
+</head>
+<body>
+    <header>
+        <h1 class="mtr">Mtr</h1>
+        <div>
+            <% if (user) { %>
+                <p class="user">Welcome, <%= user.email %></p>
+                <nav>
+                    <button class="checkbtn"><i class="fa fa-2x fa-bars"></i></button>
+                    <ul>
+                        <li><a href="/course?email=<%= user.email %>">Course Page</a></li>
+                        <li><a href="/task?email=<%= user.email %>">Task Page</a></li>
+                        <li><a href="/profile">Profile Page</a></li>
+                        <li><a href="/signout">Sign Out</a></li>
+                    </ul>
+                </nav>
+            <% } %>  
+        </div> 
+    </header>
+    <% if(user) { %>
+        <div style="font-size: x-large; text-align: center; margin-top: 23vh; font-weight: bold;">You are already signed in</div>
+    <% }else{ %>    
+    <section>
+        <h1 class="head">Sign In</h1>
+        <form class="formin" action="">
+            <div>
+                <label for="email">Email Id:</label>
+                <input type="string" id="email" name="email" required>
+                <div class="email error"></div>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+                <div class="password error"></div>
+            </div>
+            <div class="submit">
+                <button>Submit</button>
+            </div>
+        </form>
+    </section>
+    <% } %>
+    <footer>
+        <p>&copy;copyright 2021 Mtr</p>
+    </footer>
+    <script>
+        const form = document.querySelector('form');
+        const emailError = document.querySelector('.email.error');
+        const passwordError = document.querySelector('.password.error');
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            //reset errors
+            emailError.textContent = '';
+            passwordError.textContent = '';
+
+            //get the values
+            const email = form.email.value;
+            const password = form.password.value;
+            
+            try {
+                const res = await fetch('/signin', {
+                    method: 'POST',
+                    body: JSON.stringify({ email, password }),
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                const data = await res.json();
+                console.log(data);
+                if (data.errors) {
+                    emailError.textContent = data.errors.email;
+                    passwordError.textContent = data.errors.password;
+                }
+                if (data.user) {
+                    location.assign('/');
+                }
+            } catch (err) {
+                console.log(err);
+            }    
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mtr|Learning Pyhton</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="new.css">
+</head>
+<body>
+    <header>
+        <h1 class="mtr">Mtr</h1>
+        <div>
+            <% if (user) { %>
+                <p class="user">Welcome, <%= user.email %></p>
+                <nav>
+                    <button class="checkbtn"><i class="fa fa-2x fa-bars"></i></button>
+                    <ul>
+                        <li><a href="/course?email=<%= user.email %>">Course Page</a></li>
+                        <li><a href="/task?email=<%= user.email %>">Task Page</a></li>
+                        <li><a href="/profile">Profile Page</a></li>
+                        <li><a href="/signout">Sign Out</a></li>
+                    </ul>
+                </nav>
+            <% } %>  
+        </div> 
+    </header>
+    <div class="main">
+        <h1>Learn Python Programming</h1>
+        <p>Learning python programming is easy. You can learn the basics of python from this tutorial by creating an account. </p>
+        <p>For new learners.</span><a href="/signup">Sign up</a></span></p>
+        <p>For existing learners.<span><a href="/signin">Sign in</a></span></p>
+        <div class="crs">
+            <% if(user){ %>
+                <a href="/course?email=<%= user.email %>" class="crspg">Go to course page</a>
+            <% }else{ %>    
+                <a href="/course" class="crspg">Go to course page</a>
+            <% } %>    
+        </div>
+        
+    </div>
+    <footer>
+        <p>&copy;copyright 2021 Mtr</p>
+    </footer>
+</body>
+</html>

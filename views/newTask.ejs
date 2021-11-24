@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Task</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="new.css">
+</head>
+<body>
+    <header>
+        <h1 class="mtr">Mtr</h1>
+        <div>
+            <% if (user) { %>
+                <p class="user">Welcome, <%= user.email %></p>
+                <nav>
+                    <button class="checkbtn"><i class="fa fa-2x fa-bars"></i></button>
+                    <ul>
+                        <li><a href="/course?email=<%= user.email %>">Course Page</a></li>
+                        <li><a href="/task?email=<%= user.email %>">Task Page</a></li>
+                        <li><a href="/profile">Profile Page</a></li>
+                        <li><a href="/signout">Sign Out</a></li>
+                    </ul>
+                </nav>
+            <% } %>  
+        </div> 
+    </header>
+    <h3 class="newTaskHead">Adding new task</h3>
+    <form class="newTaskForm" action="/task?email=<%= user.email %>" method="post">
+        <input type="hidden" name="email" value="<%=user.email%>">
+        <div class='newtask'>
+            <div>
+                <label for="desc">Description:</label><br>
+                <textarea name="Description"id="desc" cols='50' rows='10' required ></textarea>
+            </div>
+            <div>
+                Completed: <select name="Completed">
+                            <option value="true">true</option>
+                            <option value="false">false</option>
+                </select>
+                           
+            </div>
+            <div>
+                Deadline: <input type="date" name="Deadline" required>
+            </div>
+        </div>
+        <input class="newTaskSubmit" type="submit" value="Submit Now">
+    </form>
+    <footer>
+        <p>&copy;copyright 2021 Mtr</p>
+    </footer>
+</body>
+</html>

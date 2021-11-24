@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mtr|Task Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="new.css">
+</head>
+<body>
+    <header>
+        <h1 class="mtr">Mtr</h1>
+        <div>
+            <% if (user) { %>
+                <p class="user">Welcome, <%= user.email %></p>
+                <nav>
+                    <button class="checkbtn"><i class="fa fa-2x fa-bars"></i></button>
+                    <ul>
+                        <li><a href="/course?email=<%= user.email %>">Course Page</a></li>
+                        <li><a href="/task?email=<%= user.email %>">Task Page</a></li>
+                        <li><a href="/profile">Profile Page</a></li>
+                        <li><a href="/signout">Sign Out</a></li>
+                    </ul>
+                </nav>
+            <% } %>  
+        </div> 
+    </header>
+    <h2>Tasks</h2>
+    <h4>
+        <a href="./newTask?email=<%= user.email %>">Create New Task</a>
+    </h4>
+    <div class="frres">
+    <table class=tab>
+        <thead>
+            <tr>
+                <th>Task no.</th>
+                <th class="desc">Description</th>
+                <th>Completed</th>
+                <th class="deadline">Deadline</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <input type="hidden" value="<%=user._id%>">
+            <% for(var i=0;i<tasks.length;i++){ %>
+            <tr>
+                <td data-label="Task no."><%=i+1 %></td>
+                <td data-label="Description"><%=tasks[i].Description %></td>
+                <td data-label="Completed"><%=tasks[i].Completed %></td>
+                <td data-label="Deadline"><%=tasks[i].Deadline %></td>
+                <td data-label="Edit"><a href="./editTask/<%= tasks[i]._id %>" class="edit"><i class="fa fa-pencil" aria-hidden="true"></i></a></td>
+                <td data-label="Delete"><a href="" class="delete" data-doc="<%= tasks[i]._id %>"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+            </tr>
+            <% } %>
+        </tbody>
+    </table>
+    </div>
+    <footer>
+        <p>&copy;copyright 2021 Mtr</p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script>
+        if(window.location.pathname == "/task"){
+            $delete = $(".tab tbody td a.delete");
+            $delete.click(function(){
+                var id = $(this).attr("data-doc")
+                var request = {
+                    "url":`/task/${id}`,
+                    "method":"DELETE"
+                }
+                if(confirm("Do you really want to delete this task?")){
+                    $.ajax(request).done(function(response){
+                        location.reload()
+                    })
+                }
+            })
+        }    
+    </script>
+    
+</body>
+</html>

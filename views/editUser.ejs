@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="new.css">
+    <title>Edit Profile</title>
+</head>
+<body>
+    <header>
+        <h1 class="mtr">Mtr</h1>
+        <div>
+            <% if (user) { %>
+                <p class="user">Welcome, <%= user.email %></p>
+                <nav>
+                    <button class="checkbtn"><i class="fa fa-2x fa-bars"></i></button>
+                    <ul>
+                        <li><a href="/course?email=<%= user.email %>">Course Page</a></li>
+                        <li><a href="/task?email=<%= user.email %>">Task Page</a></li>
+                        <li><a href="/profile">Profile Page</a></li>
+                        <li><a href="/signout">Sign Out</a></li>
+                    </ul>
+                </nav>
+            <% } %>  
+        </div> 
+    </header>
+    <div class="update">
+        <h3 style="text-decoration-line: underline;">Edit Profile</h3>
+        <form action="" class="updateUser" id="update" >  
+          <div style="margin: 10px;"> First Name: <input type="text" name="FirstName" id="fstnm" value="<%= user.FirstName %>" required></div>
+          <div style="margin: 10px;"> Last Name: <input type="text" name="LastName" id="lstnm" value="<%= user.LastName %>" required></div> 
+          <div style="margin: 10px;"> Email Id: <input type="email" name="email" id="email" value="<%= user.email %>" required></div>
+          <div style="margin: 10px;"> Password: <input type="password" name="password" id="password" placeholder="Enter new password"></div>
+          <div style="margin: 10px;"> Contact Number: <input type="tel" name="PhnNo" id="phnno" value="<%= user.PhnNo %>" required></div>
+          <div>Profile Picture: <input type="file" name="file" id="photo" accept="image/jpeg , image/png" ></div>
+          
+          <input type="submit" class="save" data-doc="<%=user._id%>" value="Save" onmouseover="this.style.backgroundColor='red'" onMouseOut="this.style.backgroundColor='rgb(173, 164, 164)'">
+        </form>
+    </div>
+    <footer>
+        <p>&copy;copyright 2021 Mtr</p>
+    </footer>
+    <script>
+        const form = document.querySelector('form');
+        form.addEventListener('submit', async(e) => {
+            e.preventDefault();
+
+            const FirstName = document.getElementById('fstnm');
+            const LastName = document.getElementById('lstnm');
+            const email = document.getElementById('email');
+            const password = document.getElementById('password');
+            const PhnNo = document.getElementById('phnno');
+            const file = document.getElementById('photo');
+            
+            const formData = new FormData();
+            formData.append("FirstName", FirstName.value);
+            formData.append("LastName", LastName.value);
+            formData.append("email", email.value);
+            formData.append("password", password.value);
+            formData.append("PhnNo", PhnNo.value);
+            formData.append("file", file.files[0]);
+            try {
+                const res = await fetch('/editUser', {
+                    method: 'post',
+                    body: formData
+                });
+                const data = await res.json();
+                if(data){
+                    location.assign('/profile');
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        });
+    </script>
+</body>
+</html>

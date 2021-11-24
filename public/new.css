@@ -1,0 +1,320 @@
+body{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.mtr{
+    margin:23px 32px;
+}
+.main{
+    text-align: center;
+    margin:100px 50px;
+}
+.crs{
+    margin-top: 32px;
+    font-size: large;
+}
+.crspg{
+    text-align: center;
+    background: rgb(126, 120, 116);
+    padding: 5px;
+    border-radius: 10px;
+}
+footer{
+    background-color: #0a183d;
+    color: #fff;
+    text-align: center;
+    margin-top: auto;
+}
+div p{
+    font-size:large;
+}
+a{
+    text-decoration: none;
+    background-color:darkblue;
+    color:cyan;
+    border: 2px solid darkblue;
+    border-radius: 7px;
+}
+a:hover{
+    color:beige;
+}
+
+.head{
+    text-align: center;
+    text-decoration-line: underline;
+}
+.formin{
+    width: 24rem;
+    margin: 50px auto;
+    text-align: center;
+    border: 2px solid rgb(168, 139, 134);
+}
+form div{
+    margin: 7px;
+}
+.error{
+    color: red;
+}
+.submit{
+    text-align: center;
+    background-color:rgb(168, 139, 134);
+    margin-top: 14px;
+}
+.user{
+    float: right;
+    margin-top: -55px;
+    margin-right: 100px;
+    padding: 3px;
+}
+.checkbtn{
+    float: right;
+    margin-top: -60px;
+    margin-right: 5px;
+    padding: 3px;
+    cursor: pointer;
+}
+nav ul{
+    border: 2px solid black;
+    right: 5px;
+    top: 52px;
+    position: absolute;
+    list-style: none;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: darkblue;
+}
+ul{
+    display: none;
+}
+nav ul li {
+    margin: 4px;
+} 
+nav ul li a{
+    color: rgb(199, 184, 184);
+}
+nav:hover  ul{
+    display: block;
+}
+.lhead{
+    text-align: center;
+}
+.lessons .container{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 1rem;
+    text-align: center;
+}
+.lesson-item{
+    background-color:aqua;
+    border-radius: 7px;
+    cursor: pointer;
+}
+.lesson-item:hover{
+    background-color: darkcyan;
+}
+.lesson-border{
+    border-bottom:black 5px solid;
+}
+hr{
+    height: 5px;
+    background-color: grey;
+    border-radius: 5px;
+}
+#lesson-1-content,
+#lesson-2-content,
+#lesson-3-content{
+    display: none;
+}
+.show{
+    display: block !important;
+}
+.lsn-head{
+    text-decoration-line: underline;
+}
+.iframe-container{
+    position:relative;
+    width: 90%;
+    padding-bottom: 56.25%;
+    height: 0;
+    margin: 55px auto;
+}
+.iframe-container iframe{
+    position:absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.lesson-content .container{
+    width: 70%;
+    margin: 25px auto;
+    text-align: center;
+}   
+.status{
+    border: 2px solid blue;
+    background-color: rgb(76, 193, 197);
+    border-radius: 12px;
+    padding: 3px;
+    cursor: pointer;
+}
+.status:hover,.mark:hover{
+    background-color: rgb(5, 128, 133);
+}
+.mark{
+    background-color: rgb(76, 193, 197);
+    border-width: 0px;
+    cursor: pointer;
+    text-align: center;
+}
+.check{
+    display: none;
+}
+.complete{
+    border: 2px solid blue;
+    background-color:green;
+    border-radius: 12px;
+    padding: 3px;
+    cursor: default;
+}
+.tsk{
+    margin-top: 50px;
+}
+h2{
+    text-align: center;
+    text-decoration-line: underline;
+}
+.tab{
+    margin: 3px auto;
+    text-align: center;
+    border: 1px solid black;
+}
+th{
+    border: 1px solid black;
+}
+td{
+    border: 1px solid black;
+}
+table{
+    border-spacing: 0px;
+    width: 87%;
+}
+.desc, .deadline{
+    min-width: 190px;
+}
+.frres{
+    overflow-x: auto;
+}
+h4{
+    margin-bottom: 4px;
+    margin-left: 6%;
+}
+h4 a:hover{
+    color:brown;
+}
+td a,.edit{
+    text-decoration: none;
+}
+td a:hover{
+    color: cyan;
+}
+.delete, .edit{
+    background-color:white;
+    color: blue;
+    border: none;
+}
+.delete:hover{
+    color: red;
+}    
+.newTaskHead{
+    text-align: center;
+    text-decoration-line: underline;
+}
+.newTaskForm{
+    width:30%;
+    margin: 2px auto;
+    padding: 12px;
+    border: 2px solid black;
+    background-color: coral;
+    border-radius: 8px;
+}
+.newtask{
+    margin-bottom: 12px;   
+}
+textarea{
+    width: 99%;
+}
+.newTaskSubmit{
+    margin-left: 14px;
+}
+.content{
+    display: grid;
+    grid-template-columns: repeat(1,auto);
+    grid-gap: 1rem;
+    justify-content: center;
+    border: 2px solid rgb(187, 182, 182);
+    border-radius: 10px;
+    width: 46%;
+    margin: 12px auto;
+    background-color:rgb(247, 232, 232);
+    text-align: center;
+}  
+.profilePic{
+    border: 2px solid rgb(94, 91, 91);
+    margin: auto;
+}
+.field{
+    border: 2px solid rosybrown;
+    border-radius: 5px;
+    background-color: rgb(235, 213, 213);
+}
+.userEdit{
+    margin: 23px auto;
+    width: 30%;
+    text-align: center;
+}
+.update{
+    text-align: center;
+}
+.updateUser, .updateTask{
+    border: 2px solid rgb(173, 164, 164);
+    width: 37%;
+    margin: 12px auto;
+    padding-top: 32px;
+    background-color: azure;
+    border-radius: 8px;
+}
+.save{
+    margin: 15px auto;
+    border-radius: 8px;
+    cursor: pointer;
+}
+@media (max-width: 460px) {
+    .user{
+        display: none;
+    }
+    .formin{
+        width: 82%;
+    }
+    .main{
+        margin: 100px auto;
+    }
+    
+}    
+@media (max-width: 820px){    
+    .newTaskForm{
+        width:64%;
+    }
+    .updateTask{
+        width: 73%;
+    }
+    
+}
+@media (max-width: 640px){
+    .content{
+         width: 73%;
+    }
+    .updateUser{
+        width: 91%;
+    }
+}

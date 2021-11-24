@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" type="text/css" href="/new.css">
+    <title>Edit Task</title>
+</head>
+<body>
+    <header>
+        <h1 class="mtr">Mtr</h1>
+        <div>
+            <% if (user) { %>
+                <p class="user">Welcome, <%= user.email %></p>
+                <nav>
+                    <button class="checkbtn"><i class="fa fa-2x fa-bars"></i></button>
+                    <ul>
+                        <li><a href="/course?email=<%= user.email %>">Course Page</a></li>
+                        <li><a href="/task?email=<%= user.email %>">Task Page</a></li>
+                        <li><a href="/profile">Profile Page</a></li>
+                        <li><a href="/signout">Sign Out</a></li>
+                    </ul>
+                </nav>
+            <% } %>  
+        </div> 
+    </header>
+    <div class="update">
+        <h3 style="text-decoration-line: underline;">Update Task</h3>
+        <form action="" id="update" class="updateTask">
+            <input type="hidden" value="<%=user._id%>">
+            <input type="hidden" name="email" value="<%=user.email %>">
+           Description: <input type="text" name="Description" value="<%= task.Description %>" required>
+            
+            <div style="margin: 10px auto;">
+                Completed: <input type="radio" id='r1' name="Completed" value="true" <%=task.Completed==true?'checked':''%>>
+                           <label for="r1">true</label>
+                           <input type="radio" id='r2' name="Completed" value="false" <%=task.Completed==false?'checked':''%>>
+                           <label for="r2">false</label>
+            </div>
+            Deadline: <input type="date" name="Deadline"> <br>
+            <input type="submit" class="save" data-doc="<%=task._id%>" value="Save" onmouseover="this.style.backgroundColor='red'" onMouseOut="this.style.backgroundColor='rgb(173, 164, 164)'">
+        </form>
+    </div>
+    <footer>
+        <p>&copy;copyright 2021 Mtr</p>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script>
+    <script>
+        const edit=document.querySelector('.save');
+        $("#update").submit(function(e){
+            e.preventDefault();
+            var ui_arr = $(this).serializeArray();
+            var data = {}
+            $.map(ui_arr,function(n,i){
+                data[n['name']] = n['value']
+            })
+            console.log(data);
+            var request = {
+                "url":`/editTask/${edit.dataset.doc}`,
+                "method":"PUT",
+                "data": data
+            }
+            $.ajax(request).done(function(response){
+                alert("Data updated successfully!");
+                window.location.href = response.redirect;
+            })
+        })
+    </script>
+</body>
+</html>
